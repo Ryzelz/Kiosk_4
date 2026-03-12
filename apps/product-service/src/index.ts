@@ -10,9 +10,9 @@ app.use(
     })
 );
 
-app.get("/", (req: Request, res: Response) => {
-    res.json("Product service is working");
-});
+// app.get("/", (req: Request, res: Response) => {
+//     res.json("Product service is working");
+// });
 
 app.listen(8000, () => {
     console.log("Product service is running on port 8000");

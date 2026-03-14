@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const c = require\\(''@clerk/nextjs''\\); console.log\\(Object.keys\\(c\\).filter\\(k => k.toLowerCase\\(\\).includes\\(''sign''\\) || k.toLowerCase\\(\\).includes\\(''user''\\) || k.toLowerCase\\(\\).includes\\(''auth''\\)\\)\\)\")",
+      "Bash(find c:/Users/ryzel/Desktop/Kiosk_4 -path */node_modules/@clerk/nextjs/package.json)",
+      "Bash(find c:/Users/ryzel/Desktop/Kiosk_4/node_modules/.pnpm -path */@clerk/react/dist/types/index.d.ts)",
+      "Bash(xargs grep:*)",
+      "Bash(find c:/Users/ryzel/Desktop/Kiosk_4/node_modules/.pnpm -path */@clerk/react/dist/types/*.d.ts)",
+      "Bash(mkdir -p \"c:/Users/ryzel/Desktop/Kiosk_4/apps/client/src/app/login/[[...rest]]\")",
+      "Bash(mkdir -p \"c:/Users/ryzel/Desktop/Kiosk_4/apps/client/src/app/register/[[...rest]]\")"
+    ]
+  }
+}

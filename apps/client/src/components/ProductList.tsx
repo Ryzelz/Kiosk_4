@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { ProductsType } from "@/types";
 import Categories from "./Categories";
 import ProductCard from "./ProductCard";
@@ -5,7 +8,7 @@ import Link from "next/link";
 import Filter from "./Filter";
 
 // TEMPORARY
-const products: ProductsType = [
+const internalProducts: ProductsType = [
   {
     id: 1,
     name: "Cold Brew Coffee",
@@ -114,13 +117,62 @@ const products: ProductsType = [
   },
 ];
 
-const ProductList = ({ category, params }: { category: string, params: "homepage" | "products" }) => {
+const ProductList = ({
+  category,
+  params,
+  products: externalProducts,
+}: {
+  category?: string;
+  params?: "homepage" | "products";
+  products?: ProductsType;
+}) => {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  // When a products prop is passed (e.g. from tests or custom callers),
+  // use inline category filtering instead of the URL-based Categories component.
+  if (externalProducts) {
+    const uniqueCategories = Array.from(
+      new Set(externalProducts.map((p) => p.category).filter(Boolean))
+    ) as string[];
+
+    const filtered = activeCategory
+      ? externalProducts.filter((p) => p.category === activeCategory)
+      : externalProducts;
+
+    return (
+      <div className="w-full">
+        {uniqueCategories.length > 0 && (
+          <div className="flex gap-2 mb-4">
+            {uniqueCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-3 py-1 rounded-md text-sm border ${
+                  activeCategory === cat
+                    ? "bg-black text-white border-black"
+                    : "border-gray-300 text-gray-600"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12">
+          {filtered.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full">
       <Categories />
       {params === "products" && <Filter />}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12">
-        {products.map((product) => (
+        {internalProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

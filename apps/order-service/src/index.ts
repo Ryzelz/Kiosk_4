@@ -27,6 +27,14 @@ fastify.get("/test", (request, reply) => {
 });
 
 
+fastify.get("/health", (request, reply) => {
+  return reply.status(200).send({
+    status: 'ok',
+    uptime:process.uptime(),
+    timestamp: Date.now(),
+  });
+});
+
 const start = async () => {
   try {
     await fastify.listen({ port: 8001, host: '0.0.0.0' }); 

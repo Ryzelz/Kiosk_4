@@ -9,25 +9,13 @@ app.use(cors({
 })
 );
 
-app.use(clerkMiddleware());
-
-app.get("/health", (req: Request, res: Response) => {
+ app.get("/health", (req: Request, res: Response) => {
     return res.status(200).json({
-    status: "ok",
-    uptime: process.uptime(),
-    timestamp: Date.now() 
-  });
-});
-
-app.get("/test" , (req: Request, res: Response) => {
-    const auth = getAuth(req);
-    const userID = auth.userId;
-
-    if (!userID) {
-        return res.status(401).json({ message: "you are not logged in" });
-    }
-    res.json({ message: "Product service Authorized" });
-});
+    status: 'ok',
+    uptime:process.uptime(),
+    timestamp: Date.now()
+  })
+ });
 
 app.listen(8000, () => {
     console.log("Product service is running on port 8000");

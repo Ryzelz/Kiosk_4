@@ -177,7 +177,7 @@ const ProductList = ({
         ))}
       </div>
       <Link
-        href={category ? `/products/?category=${category}` : "/products"}
+        href={category ? `/products/?category=₱{category}` : "/products"}
         className="flex justify-end mt-4 underline text-sm text-gray-500 dark:text-gray-400"
       >
         View all products

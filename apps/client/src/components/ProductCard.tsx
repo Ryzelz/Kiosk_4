@@ -44,12 +44,17 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       {/* IMAGE */}
       <Link href={`/products/${product.id}`}>
         <div className="relative aspect-[2/3] bg-gray-100 dark:bg-gray-800">
-          <Image
-            src={product.images?.[productTypes.size] || ""}
-            alt={product.name}
-            fill
-            className="object-cover hover:scale-105 transition-all duration-300"
-          />
+          {(() => {
+            const imgSrc = product.images?.[productTypes.size];
+            return imgSrc ? (
+              <Image
+                src={imgSrc}
+                alt={product.name}
+                fill
+                className="object-cover hover:scale-105 transition-all duration-300"
+              />
+            ) : null;
+          })()}
         </div>
       </Link>
       {/* PRODUCT DETAIL */}

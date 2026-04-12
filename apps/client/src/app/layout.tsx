@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -17,7 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "WIDEYE - Coffee and Bikes",
   description: "WIDEYE is the best place to find the best coffee",
   icons: {
@@ -27,9 +26,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
@@ -47,6 +46,21 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          suppressHydrationWarning
+        >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <div className="mx-auto p-4 sm:px-0 sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-6xl">
+              <Navbar />
+              {children}
+              <Footer />
+            </div>
+            <ToastContainer position="bottom-right" />
+          </ThemeProvider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

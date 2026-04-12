@@ -13,6 +13,18 @@ app.get('/health', (c) => {
     timestamp: Date.now() 
   });
 })
+import { time } from 'node:console';
+import { uptime } from 'node:process';
+
+const app = new Hono();
+
+app.get('/health', (c) => {
+  return c.json({
+    status: 'ok',
+    uptime:process.uptime(),
+    timestamp: Date.now()
+  })
+});
 
 app.get('/test', shouldBeUser, (c) => {
   // For testing only - in production, add proper Clerk authentication
@@ -27,13 +39,14 @@ const start = async () => {
   try {
     serve({
       fetch: app.fetch,
-      port: 8002,
-      hostname: '0.0.0.0'
-    }, (info) => {
+      port: 8002
+    }, 
+    (info) => {
       console.log(`Payment service is running on port 8002`);
-    });
-  } catch (err) {
-    console.error('Failed to start payment service:', err);
+    }
+  );
+  } catch (error) {
+    console.error(error);
     process.exit(1);
   }
 };

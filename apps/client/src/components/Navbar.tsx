@@ -14,6 +14,8 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import ProfileButton from "./ProfileButton";
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
@@ -73,9 +75,12 @@ const Navbar = () => {
         </DropdownMenu>
 
         <ShoppingCartIcon />
-        <Link href="/login" className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
-          Sign in
-        </Link>
+            <Show when="signed-out">
+              <SignInButton />
+            </Show>
+            <Show when="signed-in">
+              <ProfileButton />
+            </Show>
       </div>
     </nav>
   );

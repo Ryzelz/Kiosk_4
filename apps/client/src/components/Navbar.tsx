@@ -13,6 +13,9 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
+import { useEffect, useState } from "react";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import ProfileButton from "./ProfileButton";
 import { useAuth, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
@@ -65,6 +68,12 @@ const Navbar = () => {
         </DropdownMenu>
 
         <ShoppingCartIcon />
+            <Show when="signed-out">
+              <SignInButton />
+            </Show>
+            <Show when="signed-in">
+              <ProfileButton />
+            </Show>
         {isSignedIn ? (
           <UserButton />
         ) : (

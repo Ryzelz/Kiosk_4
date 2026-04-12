@@ -9,6 +9,7 @@ export type ProductType = {
   sizes: [string, ...string[]];
   colors: [string, ...string[]];
   images: Record<string, string>;
+  category?: string;
 };
 
 export type ProductsType = ProductType[];

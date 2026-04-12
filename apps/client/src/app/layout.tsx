@@ -31,6 +31,21 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50 transition-colors`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="mx-auto p-4 sm:px-0 sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-6xl">
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
+          <ToastContainer position="bottom-right" />
+        </ThemeProvider>
+      </body>
+    </html>
       <html lang="en" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}

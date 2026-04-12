@@ -23,11 +23,12 @@ fastify.get("/test", {preHandler:shouldBeUser} , (request, reply) => {
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 8001 }); 
+    await fastify.listen({ port: 8001, host: '0.0.0.0' }); 
     console.log('Order service is running on port 8001');
-  }catch (err) {
-    console.error(err);
+  } catch (err) {
+    console.error('Failed to start order service:', err);
     process.exit(1);
   }
 };
+
 start();    

@@ -1,16 +1,26 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { time } from 'node:console';
-import { uptime } from 'node:process';
+import { clerkMiddleware } from '@hono/clerk-auth'
+import { shouldBeUser } from './middleware/authMiddleware.js';
 
 const app = new Hono();
+
+// Register Clerk middleware globally
+app.use('*', clerkMiddleware());
 
 app.get('/health', (c) => {
   return c.json({
     status: 'ok',
-    uptime:process.uptime(),
+    uptime: process.uptime(),
     timestamp: Date.now()
-  })
+  });
+});
+
+app.get('/test', shouldBeUser, (c) => {
+  return c.json({
+    message: 'payment service is Authenticated', 
+    userId: c.get("userId")
+  });
 });
 
 const start = async () => {

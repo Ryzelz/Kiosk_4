@@ -19,6 +19,8 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@clerk/express": "^1.1.9",
+    "@hono/clerk-auth": "^3.1.1",
     "cors": "^2.8.6",
     "express": "^5.2.1"
   }

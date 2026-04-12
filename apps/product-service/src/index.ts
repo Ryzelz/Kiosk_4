@@ -1,7 +1,11 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
+import { shouldBeUser } from "./middleware/authMiddleware.js";
+import { clerkMiddleware } from "@clerk/express";
 
 const app = express();
+
+app.use(clerkMiddleware());
 
 app.use(
     cors({
@@ -17,6 +21,10 @@ app.use(
     timestamp: Date.now()
   })
  });
+
+app.get("/test", shouldBeUser, (req: Request, res: Response) => {
+    res.json({message: "Product service authenticated", userId: req.userId})
+});
 
 app.listen(8000, () => {
     console.log("Product service is running on port 8000");

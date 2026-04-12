@@ -66,14 +66,8 @@ const Navbar = () => {
         </DropdownMenu>
 
         <ShoppingCartIcon />
-            <Show when="signed-out">
-              <SignInButton />
-            </Show>
-            <Show when="signed-in">
-              <ProfileButton />
-            </Show>
         {isSignedIn ? (
-          <UserButton />
+          <ProfileButton />
         ) : (
           <>
             <Link href="/login" className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors">

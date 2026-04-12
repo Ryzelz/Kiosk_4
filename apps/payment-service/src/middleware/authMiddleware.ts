@@ -10,4 +10,5 @@ export const shouldBeUser = createMiddleware(async (c, next) => {
       message: "you are not logged in"
     });
   }
+  await next();
 })

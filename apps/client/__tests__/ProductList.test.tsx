@@ -9,6 +9,7 @@
  */
 import { render, screen, fireEvent } from '@testing-library/react';
 import ProductList from '@/components/ProductList';
+import { ProductType } from '@/types';
 
 jest.mock('next/image', () => ({
   __esModule: true,
@@ -42,7 +43,7 @@ jest.mock('next/navigation', () => ({
   usePathname: () => '/',
 }));
 
-const products = [
+const products: ProductType[] = [
   {
     id: 1,
     name: 'Cold Brew',

@@ -66,6 +66,8 @@ export const updateProduct = async (req:Request, res:Response) => {}
 export const deleteProduct = async (req:Request, res:Response) => {}
 export const getProduct = async (req:Request, res:Response) => {}
 export const getProducts = async (req:Request, res:Response) => {
+
+    const 
     try {
         const { category } = req.query;
         const products = await prisma.product.findMany({
